@@ -1,8 +1,12 @@
 package com.example.top10downloaderapp
 
+import android.app.SearchManager
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.top10downloaderapp.databinding.CardCellBinding
 import com.squareup.picasso.Picasso
@@ -21,6 +25,12 @@ class RecycleTopApp(var listTop : List<TopApp> , var context : Context) : Recycl
             Picasso.with(context)
                 .load(list[position].image)
                 .into(imageView2)
+        }
+        //open google to search
+        holder.itemView.setOnClickListener {
+            val intent = Intent(Intent.ACTION_WEB_SEARCH)
+            intent.putExtra(SearchManager.QUERY, list[position].name)
+            context.startActivity(intent)
         }
     }
 
